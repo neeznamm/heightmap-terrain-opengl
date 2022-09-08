@@ -6,6 +6,14 @@ option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
 add_subdirectory(vendor/glfw)
 
+# Set where the ImGui files are stored
+set(IMGUI_PATH "Absolute path to imgui folder") # imgui-1.74 used for this project
+
+# Compile as static library
+file(GLOB IMGUI_SOURCES ${IMGUI_PATH}/*.cpp)
+add_library("ImGui" STATIC ${IMGUI_SOURCES})
+target_include_directories("ImGui" PUBLIC ${IMGUI_PATH}/examples/example_glfw_opengl3) 
+
 if(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
 else()
@@ -51,5 +59,10 @@ target_link_libraries(${PROJECT_NAME}
 		      glfw
                       ${GLFW_LIBRARIES} ${GLAD_LIBRARIES}
 		      )
+
+#target_link_libraries(${PROJECT_NAME} "Absolute path to assimp binaries - assimp.dll or libassimp.so etc.") # Optional
+
+target_link_libraries(${PROJECT_NAME} "ImGui")	  
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
