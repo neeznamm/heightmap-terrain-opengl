@@ -135,6 +135,7 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // load image, create texture and generate mipmaps
     int width, height, nrChannels;
+    // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
     unsigned char *data = stbi_load("./src/terrainmaps/heightmap.png", &width, &height, &nrChannels, 0);
     if (data)
     {
@@ -297,17 +298,19 @@ int main()
     
 
     // MODELS
-    //modelShader.use();
-    //modelShader.setVec3("lightColor", 0.9f, 0.9f, 1.0f);
-    //modelShader.setVec3("lightPos", lightPos);
-    //modelShader.setVec3("viewPos", camera.Position);
+    /*
+    modelShader.use();
+    modelShader.setVec3("lightColor", 0.9f, 0.9f, 1.0f);
+    modelShader.setVec3("lightPos", lightPos);
+    modelShader.setVec3("viewPos", camera.Position);
     
-    //stbi_set_flip_vertically_on_load(true);
-    //Model tree1("./src/resources/objects/tree1/tree1.obj");
-    //unsigned int modelDiffuseMap = loadTexture("./src/resources/objects/tree1/diffuse.jpeg");
-    //modelShader.setInt("modelDiffuse", 7);
-    //unsigned int modelSpecularMap = loadTexture("./src/resources/objects/tree1/specular.png");
-    //modelShader.setInt("modelSpecular", 8);
+    stbi_set_flip_vertically_on_load(true);
+    Model tree1("./src/resources/objects/tree1/tree1.obj");
+    unsigned int modelDiffuseMap = loadTexture("./src/resources/objects/tree1/diffuse.jpeg");
+    modelShader.setInt("modelDiffuse", 7);
+    unsigned int modelSpecularMap = loadTexture("./src/resources/objects/tree1/specular.png");
+    modelShader.setInt("modelSpecular", 8);
+    */
 
     //SKYBOX
     std::vector<std::string> faces
@@ -474,7 +477,7 @@ int main()
         tree1.Draw(modelShader);
         */
 
-       // render your GUI
+       // render GUI
         ImGui::SetNextWindowSize(ImVec2((float)400.0f, (float)175.0f));
         ImGui::Begin("Terrain lighting");
         ImGui::ColorEdit3("lightColor", (float*)&lightColor);
